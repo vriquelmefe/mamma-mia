@@ -14,15 +14,15 @@ const Navegacion = () => {
   }
     return (
       <>
-        <Navbar bg="dark" data-bs-theme="dark">
+        <Navbar bg="dark" data-bs-theme="dark" className='navegacion' fixed="top">
           <Container>
             <Spinner animation="border" role="status">
               🍕
              </Spinner>
-            <Navbar.Brand href="#home">  Navbar</Navbar.Brand>
+            <Navbar.Brand href="#home"> Mamma Mía</Navbar.Brand>
               <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: '120px' }}
+              className="me-auto my-4 my-lg-0"
+              style={{ maxHeight: '100px' }}
               navbarScroll
               >
                 <Nav.Link href="#action1"> <Button variant="outline-warning">🍕 Home</Button></Nav.Link>
@@ -37,7 +37,7 @@ const Navegacion = () => {
               </Nav>
               </Nav>      
               <Nav className='justify-content-end ms-auto' >
-                  <Nav.Link href="#action6" > <Button variant="outline-success">🛒 Total: $ {total.toLocaleString()}</Button></Nav.Link>
+                  <Nav.Link href="#action6" > <Button variant="outline-light">🛒 Total: $ {total.toLocaleString()}</Button></Nav.Link>
               </Nav>         
           </Container>
         </Navbar>
