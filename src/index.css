@@ -1,0 +1,27 @@
+body{
+    background-image: url('https://media.istockphoto.com/id/1213777263/es/foto/ingredientes-en-la-pizarra-negra-vista-superior.jpg?s=612x612&w=0&k=20&c=EdW3oeRsABX5hNwlRxuHrnC2Ox2O28UoxCTbeSxYivA=');
+    background-size: cover;
+    background-repeat: no-repeat;
+     font-family: "Playwrite HR Lijeva", cursive;
+}
+.header{
+    /* background-image: url('https://media.istockphoto.com/id/979167764/es/foto/pizza-de-pepperoni-sabroso-y-cocinar-ingredientes-tomates-especias-albahaca-sobre-fondo-negro.jpg?s=612x612&w=0&k=20&c=tPB110ihU3MCVhv4gXCPAI__glZ8V1uFzfKJ6KXDahg=');
+    background-size: cover; */
+    height: 50vh;
+    align-content: center;
+    opacity: 4;
+     h1{
+        font-size: 6em;
+        font-style: oblique;
+        text-shadow: 2px 4px 10px red;
+     }
+   
+}
+.productos{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 3rem;
+    box-shadow: 4px 10px 20px rgb(219, 167, 54);
+    border-radius: 20px;
+    background-color: rgba(40, 39, 39, 0.896);
+}
