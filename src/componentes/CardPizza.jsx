@@ -24,8 +24,8 @@ function CardPizza({img, name,ingredientes,price}) {
       <Card.Title>Precio: $ <span>{ price.toLocaleString()}</span></Card.Title>
           <Card.Body className='flex'>
 
-                <Card.Link href="#" className='md-col-4'>  <Button variant="secondary">Ver más 👀</Button></Card.Link>
-        <Card.Link href="#"  className='md-col-4'>  <Button variant="dark">Añadir 🛒</Button></Card.Link>
+                <Card.Link href="#" className=' col md-col-4'>  <Button variant="secondary" >Ver más 👀</Button></Card.Link>
+        <Card.Link href="#"  className='col md-col-4'>  <Button variant="dark">Añadir 🛒</Button></Card.Link>
             
                 
         </Card.Body>
