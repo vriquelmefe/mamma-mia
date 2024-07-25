@@ -5,13 +5,20 @@ import Header from './Header';
 import { useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
+import Image from 'react-bootstrap/Image';
+
 
 const Registro = () => {
     const [correo, setCorreo] = useState('');
     const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
-  const [validated, setValidated] = useState(false);
+    const [validated, setValidated] = useState(false);
+      const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -23,7 +30,8 @@ const Registro = () => {
         console.log('Nombre:', nombre);
         console.log('Password:', apellido);
         console.log('Correo:', correo);
-        alert('Formulario enviado');
+       // alert('Formulario enviado');
+        handleShow()
     }
 
     setValidated(true);
@@ -31,11 +39,11 @@ const Registro = () => {
   return (
       <>
           
-          <Form noValidate validated={validated} onSubmit={handleSubmit} className='container w-50 pb-4'>
+          <Form noValidate validated={validated} onSubmit={handleSubmit} className='container w-50 pb-4 text-white'>
                <Header  titulo="Mamma Mia" descripcion="Tenemos las mejores pizzas que podrás encontrar" />
-            <h4 className="text-center text-white">Login</h4>
+            <h4 className="text-center text-white">Registro</h4>
       <Row className="mb-3">
-        <Form.Group as={Col} md="4" controlId="validationCustom01">
+        <Form.Group as={Col} md="6" controlId="validationCustom01">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
             required
@@ -45,7 +53,7 @@ const Registro = () => {
                             onChange={(e) => setNombre(e.target.value)}
           />
         </Form.Group>
-        <Form.Group as={Col} md="4" controlId="validationCustom02">
+        <Form.Group as={Col} md="6" controlId="validationCustom02">
           <Form.Label>Apellido</Form.Label>
           <Form.Control
             required
@@ -55,8 +63,8 @@ const Registro = () => {
                             onChange={(e) => setApellido(e.target.value)}
           />
         </Form.Group>
-        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-          <Form.Label>Correo</Form.Label>
+        <Form.Group controlId="validationCustomUsername" className='mt-2'>
+          <Form.Label>Correo electrónico</Form.Label>
           <InputGroup hasValidation>
             <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
             <Form.Control
@@ -80,7 +88,21 @@ const Registro = () => {
             feedbackType="invalid"
         />
       </Form.Group>
-      <Button type="submit">Registrar</Button>
+              <Button type="submit" className='bg-warning'>Registrar</Button>
+               <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Registro exitoso!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='text-center'>
+                      <Image src="https://media.istockphoto.com/id/1194550265/es/vector/concepto-del-servicio-de-entrega-r%C3%A1pida-de-pizza-hombre-fuera-del-monitor-de-pantalla-las.jpg?s=612x612&w=0&k=20&c=n3fi1qt-QXNKq4wdXsFcvewj1VZU8gfnpU7YCks4flY=" roundedCircle  className='w-75'/>
+                  <p>Felicidades, registro exitoso!</p>
+                  </Modal.Body>
+        <Modal.Footer>
+          <Button variant="warning" onClick={handleClose}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Form>
       </>
   );

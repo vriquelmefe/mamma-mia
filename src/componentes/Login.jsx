@@ -4,26 +4,32 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import Header from './Header';
+import Image from 'react-bootstrap/Image';
+import Modal from 'react-bootstrap/Modal';
 
 const Login = () => {
-  const [correo, setCorreo] = useState('');
-  const [password, setPassword] = useState('');
-  const [validated, setValidated] = useState(false);
+    const [correo, setCorreo] = useState('');
+    const [password, setPassword] = useState('');
+    const [validated, setValidated] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
     
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    } else {
-        console.log('Correo:', correo);
-        console.log('Password:', password);
-        alert('Formulario enviado');
-    }
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            console.log('Correo:', correo);
+            console.log('Password:', password);
+            // alert('Formulario enviado');
+            handleShow()
+        }
 
-    setValidated(true);
-  };
+        setValidated(true);
+    };
 
   return (
     <>
@@ -33,7 +39,8 @@ const Login = () => {
         <Row className="mb-3">
           <Form.Group controlId="validationCustomUsername" className='my-3'>
             <Form.Label>Correo electrónico</Form.Label>
-            <InputGroup hasValidation>
+                      <InputGroup hasValidation>
+                           <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
               <Form.Control
                 type="email"
                 placeholder="Correo electrónico"
@@ -71,7 +78,21 @@ const Login = () => {
             feedbackType="invalid"
           />
         </Form.Group>
-        <Button type="submit" className='bg-warning'>Ingresar</Button>
+              <Button type="submit" className='bg-warning'>Ingresar</Button>
+               <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Logeo exitoso!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='text-center'>
+                      <Image src="https://media.istockphoto.com/id/1485017862/es/vector/chef-italiano-presentando-pizza-logo.jpg?s=612x612&w=0&k=20&c=eL38NRfvuPTvJlhJ2Z5j_WA0-eo40rFF19Zq5UiK3yY=" roundedCircle  className='w-75'/>
+                  <p>Felicidades, Ingreso exitoso!</p>
+                  </Modal.Body>
+        <Modal.Footer>
+          <Button variant="warning" onClick={handleClose}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
       </Form>
     </>
   );
