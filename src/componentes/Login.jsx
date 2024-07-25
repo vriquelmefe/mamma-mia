@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
@@ -72,7 +71,7 @@ const Login = () => {
             feedbackType="invalid"
           />
         </Form.Group>
-        <Button type="submit">Enviar</Button>
+        <Button type="submit" className='bg-warning'>Ingresar</Button>
       </Form>
     </>
   );

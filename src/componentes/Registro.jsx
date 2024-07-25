@@ -44,7 +44,6 @@ const Registro = () => {
                           defaultValue=""
                             onChange={(e) => setNombre(e.target.value)}
           />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustom02">
           <Form.Label>Apellido</Form.Label>
@@ -55,7 +54,6 @@ const Registro = () => {
                           defaultValue=""
                             onChange={(e) => setApellido(e.target.value)}
           />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="validationCustomUsername">
           <Form.Label>Correo</Form.Label>
@@ -69,20 +67,20 @@ const Registro = () => {
                                 onChange={(e) => setCorreo(e.target.value)}
             />
             <Form.Control.Feedback type="invalid">
-              Please choose a correo.
+              Por favor ingresa un correo.
             </Form.Control.Feedback>
           </InputGroup>
         </Form.Group>
       </Row>
       <Form.Group className="mb-3">
         <Form.Check
-          required
-          label="Agree to terms and conditions"
-          feedback="You must agree before submitting."
-          feedbackType="invalid"
+         required
+            label="Aceptar términos y condiciones"
+            feedback="Debes aceptar antes de enviar."
+            feedbackType="invalid"
         />
       </Form.Group>
-      <Button type="submit">Submit form</Button>
+      <Button type="submit">Registrar</Button>
     </Form>
       </>
   );
