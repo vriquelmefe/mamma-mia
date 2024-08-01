@@ -14,21 +14,27 @@ const Login = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    
     const handleSubmit = (event) => {
         const form = event.currentTarget;
-    
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
-            console.log('Correo:', correo);
-            console.log('Password:', password);
-            // alert('Formulario enviado');
-            handleShow()
-        }
+        console.log('pasword', password.length)
+        if (password.length < 6 || correo == '') {
+            alert('La contraseña debe tener al menos 7 caracteres y/o el correo debe tener el siguiente formato : a.a@gmail.com')
 
-        setValidated(true);
+        } else {
+            
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            } else {
+                console.log('Correo:', correo);
+                console.log('Password:', password);
+                handleShow()
+            }
+    
+            setValidated(true);
+        }
+        
     };
 
   return (
@@ -64,22 +70,12 @@ const Login = () => {
                 required
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Form.Control.Feedback type="invalid">
-                Por favor ingresa la contraseña.
-              </Form.Control.Feedback>
             </InputGroup>
-          </Form.Group>
+              <span >{password.length < 6 ? 'Debe ingresar minimo 6 digitos' : '' }</span>
+                  </Form.Group>
         </Row>
-        <Form.Group className="mb-3">
-          <Form.Check
-            required
-            label="Aceptar términos y condiciones"
-            feedback="Debes aceptar antes de enviar."
-            feedbackType="invalid"
-          />
-        </Form.Group>
               <Button type="submit" className='bg-warning'>Ingresar</Button>
-               <Modal show={show} onHide={handleClose}>
+               <Modal show={show} onHide={handleClose} className='bg-dark text-white'>
         <Modal.Header closeButton>
           <Modal.Title>Logeo exitoso!</Modal.Title>
         </Modal.Header>

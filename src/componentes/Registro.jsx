@@ -13,7 +13,9 @@ import Image from 'react-bootstrap/Image';
 const Registro = () => {
     const [correo, setCorreo] = useState('');
     const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
+    const [apellido, setApellido] = useState('');
+    const [password, setPassword] = useState('');
+     const [confirmPassword, setConfirmPassword] = useState('');
     const [validated, setValidated] = useState(false);
       const [show, setShow] = useState(false);
 
@@ -28,12 +30,17 @@ const Registro = () => {
       event.stopPropagation();
     } else {
         console.log('Nombre:', nombre);
-        console.log('Password:', apellido);
+        console.log('Apellido:', apellido);
         console.log('Correo:', correo);
-       // alert('Formulario enviado');
-        handleShow()
+        console.log('Password:', password);
+        console.log('Confirmacion:', confirmPassword);
+        // alert('Formulario enviado');
+        if (correo.length > 7 && nombre.trim() !== '' && apellido.trim() !== '') {
+            
+            handleShow()
+        }
     }
-
+    
     setValidated(true);
   };
   return (
@@ -78,7 +85,39 @@ const Registro = () => {
               Por favor ingresa un correo.
             </Form.Control.Feedback>
           </InputGroup>
-        </Form.Group>
+                  </Form.Group>
+                  
+          <Form.Group controlId="formGroupPassword" className='my-2'>
+            <Form.Label>Contraseña</Form.Label>
+            <InputGroup hasValidation>
+              <Form.Control
+                type="password"
+                placeholder="Contraseña"
+                aria-describedby="inputGroupPrepend"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Form.Control.Feedback type="invalid">
+                Por favor ingresa la contraseña.
+              </Form.Control.Feedback>
+            </InputGroup>
+                  </Form.Group>
+                  
+          <Form.Group controlId="formGroupPassword" className='my-2'>
+            <Form.Label>Confirmar contraseña</Form.Label>
+            <InputGroup hasValidation>
+              <Form.Control
+                type="confirmPassword"
+                placeholder="Conformar contraseña"
+                aria-describedby="inputGroupPrepend"
+                required
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <Form.Control.Feedback type="invalid">
+                Por favor ingresa confirmación de contraseña.
+              </Form.Control.Feedback>
+            </InputGroup>
+          </Form.Group>
       </Row>
       <Form.Group className="mb-3">
         <Form.Check
@@ -89,7 +128,7 @@ const Registro = () => {
         />
       </Form.Group>
               <Button type="submit" className='bg-warning'>Registrar</Button>
-               <Modal show={show} onHide={handleClose}>
+               <Modal show={show} onHide={handleClose}  className='bg-dark'>
         <Modal.Header closeButton>
           <Modal.Title>Registro exitoso!</Modal.Title>
         </Modal.Header>
