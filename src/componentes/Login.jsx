@@ -19,8 +19,12 @@ const Login = () => {
         const form = event.currentTarget;
         console.log('pasword', password.length)
         if (password.length < 6 || correo == '') {
-            alert('La contraseña debe tener al menos 7 caracteres y/o el correo debe tener el siguiente formato : a.a@gmail.com')
-
+           if (password.length < 6) {
+        
+        alert('La contraseña debe tener al menos 6 caracteres');
+      } else {
+        alert('El correo no debe estar vacio y debe tener el siguiente formato : a.a@gmail.com');
+      }
         } else {
             
             if (form.checkValidity() === false) {
@@ -29,11 +33,11 @@ const Login = () => {
             } else {
                 console.log('Correo:', correo);
                 console.log('Password:', password);
-                handleShow()
+              handleShow()
             }
-    
+            
             setValidated(true);
-        }
+          }
         
     };
 
@@ -75,7 +79,7 @@ const Login = () => {
                   </Form.Group>
         </Row>
               <Button type="submit" className='bg-warning'>Ingresar</Button>
-               <Modal show={show} onHide={handleClose} className='bg-dark text-white'>
+               <Modal show={show} onHide={handleClose} className='bg-dark'>
         <Modal.Header closeButton>
           <Modal.Title>Logeo exitoso!</Modal.Title>
         </Modal.Header>

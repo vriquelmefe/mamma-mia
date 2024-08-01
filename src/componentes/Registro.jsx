@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Header from './Header';
 import { useState } from 'react';
-import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
@@ -12,8 +11,6 @@ import Image from 'react-bootstrap/Image';
 
 const Registro = () => {
     const [correo, setCorreo] = useState('');
-    const [nombre, setNombre] = useState('');
-    const [apellido, setApellido] = useState('');
     const [password, setPassword] = useState('');
      const [confirmPassword, setConfirmPassword] = useState('');
     const [validated, setValidated] = useState(false);
@@ -24,24 +21,36 @@ const Registro = () => {
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
-    
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+    event.preventDefault();
+    setValidated(false);
+    if (password.length < 6 || correo == '') {
+      if (password.length < 6) {
+        
+        alert('La contraseña debe tener al menos 6 caracteres');
+      } else {
+        alert('El correo no debe estar vacio y debe tener el siguiente formato : a.a@gmail.com');
+      }
+      return;
+    }else if (password === confirmPassword) { 
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+          console.log('Correo:', correo);
+          console.log('Password:', password);
+          console.log('Confirmacion:', confirmPassword);
+          // alert('Formulario enviado');
+          if (correo.length > 7 && password !== '' && confirmPassword !== '') {
+              
+              handleShow()
+          }
+      }
+      
+      setValidated(true);
     } else {
-        console.log('Nombre:', nombre);
-        console.log('Apellido:', apellido);
-        console.log('Correo:', correo);
-        console.log('Password:', password);
-        console.log('Confirmacion:', confirmPassword);
-        // alert('Formulario enviado');
-        if (correo.length > 7 && nombre.trim() !== '' && apellido.trim() !== '') {
-            
-            handleShow()
-        }
+      alert('Las contraseñas no coinciden');
     }
     
-    setValidated(true);
   };
   return (
       <>
@@ -50,26 +59,6 @@ const Registro = () => {
                <Header  titulo="Mamma Mia" descripcion="Tenemos las mejores pizzas que podrás encontrar" />
             <h4 className="text-center text-white">Registro</h4>
       <Row className="mb-3">
-        <Form.Group as={Col} md="6" controlId="validationCustom01">
-          <Form.Label>Nombre</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder="Nombre"
-                          defaultValue=""
-                            onChange={(e) => setNombre(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="6" controlId="validationCustom02">
-          <Form.Label>Apellido</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder="Apellido"
-                          defaultValue=""
-                            onChange={(e) => setApellido(e.target.value)}
-          />
-        </Form.Group>
         <Form.Group controlId="validationCustomUsername" className='mt-2'>
           <Form.Label>Correo electrónico</Form.Label>
           <InputGroup hasValidation>
@@ -119,14 +108,6 @@ const Registro = () => {
             </InputGroup>
           </Form.Group>
       </Row>
-      <Form.Group className="mb-3">
-        <Form.Check
-         required
-            label="Aceptar términos y condiciones"
-            feedback="Debes aceptar antes de enviar."
-            feedbackType="invalid"
-        />
-      </Form.Group>
               <Button type="submit" className='bg-warning'>Registrar</Button>
                <Modal show={show} onHide={handleClose}  className='bg-dark'>
         <Modal.Header closeButton>
