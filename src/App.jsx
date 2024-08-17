@@ -9,12 +9,13 @@ import { useState } from 'react';
 
 
 function App() {
-  const [setCurrentView] = useState('home');
+  const [currentView,setCurrentView] = useState('home');
   
   const handleShowCart = () => {setCurrentView('cart');};
   return (
     <>
       <Navegacion onCartClick={handleShowCart} />
+       {currentView === 'cart' && <Cart/>}
       <Home />
    <Login />
       <Registro />
