@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 import Spinner from 'react-bootstrap/Spinner';
+import ListGroup from 'react-bootstrap/ListGroup';
 // eslint-disable-next-line react/prop-types
 function CardPizza({img, name,ingredientes,price}) {
   return (
@@ -13,12 +14,19 @@ function CardPizza({img, name,ingredientes,price}) {
               <Card.Text>
               Ingredientes:
               </Card.Text>
-        <Card.Subtitle className="mb-2 text-muted">  <Spinner animation="grow" role="status" variant="light">
+        <Card.Subtitle className="mb-2 text-muted">
+          <ListGroup>
+          
+            <ListGroup.Item  key="index">
+          <Spinner animation="grow" role="status" variant="light">
           <span>
 
               🍕
           </span>
-             </Spinner> {ingredientes}</Card.Subtitle>
+            </Spinner> {ingredientes}
+            </ListGroup.Item>
+               </ListGroup>
+        </Card.Subtitle>
           </Card.Body>
           <hr />
       <Card.Title>Precio: $ <span>{ price.toLocaleString()}</span></Card.Title>

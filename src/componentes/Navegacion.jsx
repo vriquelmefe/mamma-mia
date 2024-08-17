@@ -5,7 +5,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Spinner from 'react-bootstrap/Spinner';
 
-const Navegacion = () => {
+// eslint-disable-next-line react/prop-types
+const Navegacion = ({onCartClick}) => {
     const[token, setToken] =useState(false)
     const total = 25000;
     const handleChange = (token) => {
@@ -13,7 +14,6 @@ const Navegacion = () => {
     setToken({ token: !token});
   }
     return (
-      <>
         <Navbar bg="dark" data-bs-theme="dark" className='navegacion'>
           <Container>
             <Spinner role="status" className='mx-3'>
@@ -37,11 +37,10 @@ const Navegacion = () => {
               </Nav>
               </Nav>      
               <Nav className='justify-content-end ms-auto' >
-                  <Nav.Link href="#action6" > <Button variant="outline-light">🛒 Total: $ {total.toLocaleString()}</Button></Nav.Link>
+                  <Nav.Link href="#action6" > <Button variant="outline-light" onClick={onCartClick}>🛒 Total: $ {total.toLocaleString()}</Button></Nav.Link>
               </Nav>         
           </Container>
         </Navbar>
-      </>
     )
     
 }
