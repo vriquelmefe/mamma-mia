@@ -6,20 +6,20 @@ import pizzas from '../assets/pizzas';
 
 const Cart = () => {
   // Inicia con todas las pizzas en 0
-  const [cartItems, setCartItems] = useState(pizzas.map((pizza) => ({...pizza, quantity: 0,})));
+  const [cartItems, setCartItems] = useState(pizzas.map((pizza) => ({...pizza, cantidad: 0,})));
 
   //aumentar la cantidad
-  const increaseQuantity = (productId) => {setCartItems((prevItems) => prevItems.map((item) =>
-    item.id === productId ? { ...item, quantity: item.quantity + 1 } : item ));};
+  const aumentarCantidad = (productId) => {setCartItems((prevItems) => prevItems.map((item) =>
+    item.id === productId ? { ...item, cantidad: item.cantidad + 1 } : item ));};
 
   //disminuir la cantidad
-  const decreaseQuantity = (productId) => {setCartItems((prevItems) => prevItems.map((item) =>
-        item.id === productId && item.quantity > 0
-          ? { ...item, quantity: item.quantity - 1 } : item));};
+  const disminuirCantidad = (productId) => {setCartItems((prevItems) => prevItems.map((item) =>
+        item.id === productId && item.cantidad > 0
+          ? { ...item, cantidad: item.cantidad - 1 } : item));};
 
   // Función para calcular el total
-  const getTotal = () => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
- // const itemsInCart = cartItems.filter(item => item.quantity > 0);
+  const getTotal = () => cartItems.reduce((sum, item) => sum + item.price * item.cantidad, 0);
+
 
   return (
     <div style={{ maxWidth: '700px', margin: 'auto', padding: '20px' }}>
@@ -29,9 +29,9 @@ const Cart = () => {
           <CartItem
             key={item.id}
             item={item}
-            onRemove={decreaseQuantity} // resta
-            onIncrease={increaseQuantity}
-            onDecrease={decreaseQuantity}
+            onRemove={disminuirCantidad} // resta
+            aumentar={aumentarCantidad}
+            descontar={disminuirCantidad}
           />
         ))}
       </ListGroup>
