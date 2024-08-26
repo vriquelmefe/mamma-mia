@@ -81,7 +81,7 @@ Authorization Bearer token_jwt
 Ejemplo con fetch:
 
 ```js
-await fetch("http://localhost:5000/api/checkout", {
+await fetch("http://localhost:5001/api/checkout", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
