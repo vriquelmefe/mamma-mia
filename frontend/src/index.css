@@ -1,0 +1,57 @@
+body{
+    background-image: url('https://media.istockphoto.com/id/1213777263/es/foto/ingredientes-en-la-pizarra-negra-vista-superior.jpg?s=612x612&w=0&k=20&c=EdW3oeRsABX5hNwlRxuHrnC2Ox2O28UoxCTbeSxYivA=');
+    background-size: cover;
+    background-repeat: no-repeat;
+     font-family: "Playwrite HR Lijeva", cursive;
+}
+.navegacion{
+    box-shadow: 0px 2px 10px rgb(219, 167, 54);
+    .pizza-spinner span{
+        animation: spin 2s linear 5s infinite alternate;
+        font-size: 30px;
+ 
+    }
+}
+.header{
+    /* background-image: url('https://media.istockphoto.com/id/979167764/es/foto/pizza-de-pepperoni-sabroso-y-cocinar-ingredientes-tomates-especias-albahaca-sobre-fondo-negro.jpg?s=612x612&w=0&k=20&c=tPB110ihU3MCVhv4gXCPAI__glZ8V1uFzfKJ6KXDahg=');
+    background-size: cover; */
+    height: 50vh;
+    align-content: center;
+    opacity: 4;
+     h1{
+        font-size: 6em;
+        font-style: oblique;
+        text-shadow: 2px 4px 10px red;
+     }
+   
+}
+.productos{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 3rem;
+    box-shadow: 4px 10px 20px rgb(219, 167, 54);
+    border-radius: 20px;
+    background-color: rgba(40, 39, 39, 0.896);
+}
+ @media (max-width: 768px){
+    .header{
+   height: 30vh;
+   margin-top: 35vh;
+        h1{
+            font-size: 3em;
+            font-style: oblique;
+            text-shadow: 2px 4px 10px red;
+         }
+         p{
+            font-size: .8em;
+         }
+    }
+    .productos{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 3rem;
+    box-shadow: 4px 10px 20px rgb(219, 167, 54);
+    border-radius: 20px;
+    background-color: rgba(40, 39, 39, 0.896);
+}
+ }
