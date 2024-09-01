@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import Header from './Header';
+import Header from '../componentes/Header';
 import Image from 'react-bootstrap/Image';
 import Modal from 'react-bootstrap/Modal';
 

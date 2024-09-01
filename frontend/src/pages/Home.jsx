@@ -1,5 +1,5 @@
-import Grilla from "./Grilla";
-import Header from "./Header"
+import Grilla from "../componentes/Grilla";
+import Header from "../componentes/Header"
 import { useState,useEffect } from "react";
 
 const Home = () => {

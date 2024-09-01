@@ -1,13 +1,12 @@
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Header from './Header';
 import { useState } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Image from 'react-bootstrap/Image';
-
+import Header from '../componentes/Header';
 
 const Registro = () => {
     const [correo, setCorreo] = useState('');

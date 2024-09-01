@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
-import CartItem from './CartItem';
+import CartItem from '../componentes/CartItem';
 import pizzas from '../assets/pizzas';
 
 const Cart = () => {

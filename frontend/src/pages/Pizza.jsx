@@ -7,7 +7,7 @@ function Pizza() {
   const [dataPizza, setDataPizza] = useState(null);
   const [isLoading, setIsLoading] = useState(true); 
   const [error, setError] = useState(null); 
-  const pizzaId = window.location.pathname.split('/')[3]; // Extract ID from URL path
+  const pizzaId = window.location.pathname.split('/')[2]; // Extract ID from URL path
   
 
   const urlPizza = `http://localhost:5001/api/pizzas/${pizzaId}`;

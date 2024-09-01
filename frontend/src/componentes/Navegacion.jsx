@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -15,29 +16,38 @@ const Navegacion = ({onCartClick}) => {
   }
     return (
         <Navbar bg="dark" data-bs-theme="dark" className='navegacion'>
-          <Container>
+        <Container>
+          <Link to="/" className='decoration-none'>
             <Spinner role="status" className='mx-3'>
               <h3 className='pizza-spinner'> 🍕</h3>
              </Spinner>
-            <Navbar.Brand href="#home"> Mamma Mía</Navbar.Brand>
+            <Navbar.Brand href="#home"> Mamma Mía</Navbar.Brand>        
+
+          </Link>
               <Nav
               className="me-auto my-4 my-lg-0"
               style={{ maxHeight: '100px' }}
               navbarScroll
               >
-                <Nav.Link href="#action1"> <Button variant="outline-warning" className="text-white">🍕 Home</Button></Nav.Link>
+                <Link to="./" className='pt-2'> <Button variant="outline-warning" className="text-white">🍕 Home</Button></Link>
 
                 <Nav hidden={token ?  false : true} onChange={handleChange}>
-                  <Nav.Link href="#action2"> <Button variant="outline-warning" className="text-white">🔒 Profile</Button></Nav.Link>
-                  <Nav.Link href="#action3"> <Button variant="outline-warning" onClick={() => setToken(!token)} className="text-white">🔒 Logout</Button></Nav.Link>
+                  <Link to="./profile" className='mx-3 pt-2'> <Button variant="outline-warning" className="text-white">🔒 Profile</Button></Link>
+                  <Link to="./" className='pt-2'> <Button variant="outline-warning" onClick={() => setToken(!token)} className="text-white">🔒 Logout</Button></Link>
               </Nav>
               <Nav hidden={token ?  true : false} onChange={handleChange}>
-                <Nav.Link href="#action4"> <Button variant="outline-warning" onClick={() => setToken(!token)}  className="text-white">🔐 Login</Button></Nav.Link>
-                <Nav.Link href="#action5"> <Button variant="outline-warning" className="text-white">🔐 Register</Button></Nav.Link>
+                <Link to="./login" className='mx-3 pt-2'> <Button variant="outline-warning" onClick={() => setToken(!token)}  className="text-white">🔐 Login</Button></Link>
+                <Link to="./register" className='pt-2'> <Button variant="outline-warning" className="text-white">🔐 Register</Button></Link>
               </Nav>
               </Nav>      
-              <Nav className='justify-content-end ms-auto' >
-                  <Nav.Link href="#action6" > <Button variant="outline-light" onClick={onCartClick}>🛒 Total: $ {total.toLocaleString()}</Button></Nav.Link>
+          <Nav className='justify-content-end ms-auto' >
+            <Link to="./cart">
+              <Button variant="outline-light" onClick={onCartClick}>🛒 Total: $ {total.toLocaleString()}</Button>
+            {/* <Button variant="outline-light">
+              �� Cart
+            </Button> */}
+          </Link>
+                  {/* <Nav.Link href="#action6" > </Nav.Link> */}
               </Nav>         
           </Container>
         </Navbar>
