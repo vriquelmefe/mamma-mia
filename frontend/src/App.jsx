@@ -12,55 +12,19 @@ import Profile from './componentes/Profile.jsx';
 import NotFound from './componentes/NotFound.jsx';
 
 function App() {
-  const [currentView, setCurrentView] = useState('home');
-  
-  const handleShowCart = () => {setCurrentView('cart');};
+
   return (
-    <>
-      <Navegacion
-        // onCartClick={handleShowCart}
-      />
-      {/* {currentView === 'cart' && <Cart />} */}
-
+<>
+        <Navegacion />
         <Routes>
-          <Route  path="/" element={ <Home />}>
-           
-          </Route>
-        <Route path="/register" element={
-          
-            <Registro />
-          }>
-          </Route>
-        <Route path="/login" element={
-          
-            <Login />
-          }>
-          </Route>
-        <Route path="/cart" element={
-          
-            <Cart />
-          }>
-        </Route>
-            <Route path="/pizza/p001" element={
-            <Pizza />
-          }>
-        </Route>
-        <Route path="/profile" element={
-            <Profile />
-          }>
-        </Route>
-        
-         <Route path="/404" element={
-          
-            <NotFound />
-          }>
-        </Route>
-         <Route path="*" element={
-          
-            <NotFound />
-          }>
-        </Route>
-
+          <Route  path="/" element={ <Home />}/>
+          <Route path="/register" element={<Registro />} />
+          <Route path="/login" element={<Login />}/>
+          <Route path="/cart" element={<Cart />}/>
+          <Route path="/pizza/p001" element={<Pizza />}/>
+          <Route path="/profile" element={<Profile />}/>
+          <Route path="/404" element={<NotFound />}/>
+          <Route path="*" element={<NotFound />}/>
         </Routes>
       <Footer fixed="bottom" />
     </>

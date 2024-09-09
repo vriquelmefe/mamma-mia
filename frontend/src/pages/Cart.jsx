@@ -1,44 +1,61 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
-import CartItem from '../componentes/CartItem';
-import pizzas from '../assets/pizzas';
 
 const Cart = () => {
-  // Inicia con todas las pizzas en 0
-  const [cartItems, setCartItems] = useState(pizzas.map((pizza) => ({...pizza, cantidad: 0,})));
-
-  //aumentar la cantidad
-  const aumentarCantidad = (productId) => {setCartItems((prevItems) => prevItems.map((item) =>
-    item.id === productId ? { ...item, cantidad: item.cantidad + 1 } : item ));};
-
-  //disminuir la cantidad
-  const disminuirCantidad = (productId) => {setCartItems((prevItems) => prevItems.map((item) =>
-        item.id === productId && item.cantidad > 0
-          ? { ...item, cantidad: item.cantidad - 1 } : item));};
-
-  // Función para calcular el total
-  const getTotal = () => cartItems.reduce((sum, item) => sum + item.price * item.cantidad, 0);
-
+  const { cart, totalPrice, decreaseQuantity, addToCart } = useContext(CartContext);
 
   return (
-    <div style={{ maxWidth: '700px', margin: 'auto', padding: '20px' }}>
-      <h2>Carrito de Compras</h2>
+    <div className="container">
+      <h2>Shopping Cart</h2>
       <ListGroup>
-        {cartItems.map((item) => (
-          <CartItem
+        {cart.map(item => (
+          <ListGroup.Item
             key={item.id}
-            item={item}
-            onRemove={disminuirCantidad} // resta
-            aumentar={aumentarCantidad}
-            descontar={disminuirCantidad}
-          />
+            className="d-flex align-items-center justify-content-between"
+            style={{ padding: '10px' }}
+          >
+            <div className="d-flex align-items-center">
+              <img
+                src={item.img}
+                alt={item.name}
+                style={{ width: '80px', height: '80px', marginRight: '15px' }}
+              />
+              <div>
+                <h6>Pizza {item.name}</h6>
+                <p>Precio: ${item.price}</p>
+                <p>
+                  {item.count > 0 && (
+                    <>
+                      <Button
+                        variant="outline-danger"
+                        size="sm"
+                        onClick={() => decreaseQuantity(item.id)}
+                      >
+                        -
+                      </Button>
+                      <span style={{ marginLeft: '10px' }}>Cantidad: {item.count}{ (' ') } </span>
+                    </>
+                  )}
+                  <Button
+                    variant="outline-primary"
+                    size="sm"
+                    onClick={() => addToCart(item)}
+                    style={{ marginRight: '10px' }}
+                  >
+                    +
+                  </Button>
+                </p>
+              </div>
+            </div>
+            <div>
+              <p >Total: ${item.price * item.count}</p>
+            </div>
+          </ListGroup.Item>
         ))}
       </ListGroup>
-      <div className="total-section" style={{ marginTop: '20px', textAlign: 'right' }}>
-        <h4 className='text-white py-3'>Total a pagar: <strong className='bg-light text-dark p-2 rounded'>${getTotal()} </strong> </h4>
-        <Button variant="success">Comprar</Button>
-      </div>
+      <h3 className='text-white py-3 bg-dark px-3 text-end'>Total Precio: ${totalPrice}</h3>
     </div>
   );
 };

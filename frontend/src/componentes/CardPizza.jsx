@@ -3,8 +3,13 @@ import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 import Spinner from 'react-bootstrap/Spinner';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { useContext } from 'react';
+import { CartContext } from "../context/CartContext";
 // eslint-disable-next-line react/prop-types
-function CardPizza({ img, name, ingredientes , price}) {
+function CardPizza({ id, img, name, ingredientes, price }) {
+  const { addToCart } = useContext(CartContext)
+  const pizza = { name, ingredientes, price, img };
+
   return (
           <Card border="warning" className="text-center m-3">
           <Card.Img variant="top" src={img}  className='img-fluid'/>
@@ -12,7 +17,7 @@ function CardPizza({ img, name, ingredientes , price}) {
         <Card.Title >{name}</Card.Title>
         <hr />
               <Card.Text>
-              Ingredientes:
+          Ingredientes: { ingredientes}
               </Card.Text>
         <Card.Subtitle className="mb-2 text-muted">
           <ListGroup>
@@ -33,7 +38,7 @@ function CardPizza({ img, name, ingredientes , price}) {
           <Card.Body className='flex'>
 
                 <Card.Link href="#" className=' col md-col-4'>  <Button variant="secondary" >Ver más 👀</Button></Card.Link>
-        <Card.Link href="#"  className='col md-col-4'>  <Button variant="dark">Añadir 🛒</Button></Card.Link>
+ <Card.Link href="#" > <Button variant="dark" onClick={() => addToCart(pizza)}>Añadir 🛒</Button></Card.Link>
             
                 
         </Card.Body>
