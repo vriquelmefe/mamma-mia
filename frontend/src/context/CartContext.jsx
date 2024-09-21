@@ -5,7 +5,8 @@ export const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-   const addToCart = (pizza) => {
+  const addToCart = (pizza) => {
+     console.log('pizza addToCart', pizza)
     setCart((prevCart) => {
       const index = prevCart.findIndex((item) => item.id === pizza.id);
       if (index !== -1) {

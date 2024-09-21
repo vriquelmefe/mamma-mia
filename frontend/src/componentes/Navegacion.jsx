@@ -6,12 +6,15 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Spinner from 'react-bootstrap/Spinner';
 import { CartContext } from "../context/CartContext";
+import { AuthContex } from '../context/AuthContex';
 
 const Navegacion = () => {
   const { getQuantity, totalPrice } = useContext(CartContext);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, toggleLoginState } = useContext(AuthContex);
+  console.log('isLoggedIn', isLoggedIn)
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const toggleLoginState = () => setIsLoggedIn(prevState => !prevState);
+ // const toggleLoginState = () => setIsLoggedIn(prevState => !prevState);
   return (
     <Navbar bg="dark" data-bs-theme="dark" className='navegacion'>
       <Container>
@@ -32,13 +35,15 @@ const Navegacion = () => {
               <Link to="/profile" className='mx-3 pt-2'>
                 <Button variant="outline-warning" className="text-white">🔒 Profile</Button>
               </Link>
+                <Link to="/" className='mx-3 pt-2'>
               <Button
                 variant="outline-warning"
                 onClick={toggleLoginState}
                 className="text-white"
               >
                 🔒 Logout
-              </Button>
+                </Button>
+                </Link>
             </>
           ) : (
             <>

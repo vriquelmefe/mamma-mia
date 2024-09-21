@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
+import { Link } from'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useContext } from 'react';
@@ -8,7 +9,7 @@ import { CartContext } from "../context/CartContext";
 // eslint-disable-next-line react/prop-types
 function CardPizza({ id, img, name, ingredientes, price }) {
   const { addToCart } = useContext(CartContext)
-  const pizza = { name, ingredientes, price, img };
+  const pizza = { name, ingredientes, price, img, id };
 
   return (
           <Card border="warning" className="text-center m-3">
@@ -37,7 +38,7 @@ function CardPizza({ id, img, name, ingredientes, price }) {
       <Card.Title>Precio: $ <span>{ price.toLocaleString()}</span></Card.Title>
           <Card.Body className='flex'>
 
-                <Card.Link href="#" className=' col md-col-4'>  <Button variant="secondary" >Ver más 👀</Button></Card.Link>
+                <Link to={`/pizza/${id}`} className=' col md-col-4'>  <Button variant="secondary" >Ver más 👀</Button></Link>
  <Card.Link href="#" > <Button variant="dark" onClick={() => addToCart(pizza)}>Añadir 🛒</Button></Card.Link>
             
                 

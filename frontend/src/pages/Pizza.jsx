@@ -3,17 +3,17 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
+import { useParams } from "react-router-dom";
 function Pizza() { 
   const [dataPizza, setDataPizza] = useState(null);
   const [isLoading, setIsLoading] = useState(true); 
   const [error, setError] = useState(null); 
-  const pizzaId = window.location.pathname.split('/')[2]; // Extract ID from URL path
-  
-
-  const urlPizza = `http://localhost:5001/api/pizzas/${pizzaId}`;
+  // const pizzaId = window.location.pathname.split('/')[2]; // Extract ID from URL path
+  const { id } = useParams();
+console.log('id en  pizza', id)
+  const urlPizza = `http://localhost:5001/api/pizzas/${id}`;
 
   useEffect(() => {
-    console.log(`Pizza ${pizzaId}`);
     const fetchData = async () => {
       try {
         const response = await fetch(urlPizza);
@@ -28,10 +28,10 @@ function Pizza() {
     };
 
     fetchData();
-  },[urlPizza, pizzaId]);
+  },[urlPizza, id]);
 
-  if (isLoading) return <div>Cargando...</div>; // Display loading message
-  if (error) return <div>Error: {error}</div>; // Display error message
+  if (isLoading) return <div>Cargando...</div>;
+  if (error) return <div>Error: {error}</div>;
 
 
   return (

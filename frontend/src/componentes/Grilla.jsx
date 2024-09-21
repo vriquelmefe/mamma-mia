@@ -27,7 +27,8 @@ const Grilla = () => {
                             name={pizza.name}
                             price={pizza.price}
                             ingredientes={pizza.ingredients.join(' , ')}
-                            pizza={pizza}
+                      pizza={pizza}
+                      id={pizza.id}
                         />
                     </div>
                 ))}
