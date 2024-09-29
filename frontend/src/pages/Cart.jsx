@@ -1,13 +1,35 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
-import { AuthContex } from '../context/AuthContex';
+import { UserContext } from '../context/UserContext';
+import { Navigate } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
+import Image from 'react-bootstrap/Image';
 
 const Cart = () => {
-  const { cart, totalPrice, decreaseQuantity, addToCart } = useContext(CartContext);
-  const { isLoggedIn } = useContext(AuthContex);
-console.log('cart', cart)
+  const { cart, totalPrice, decreaseQuantity, addToCart, cartCheckout,checkoutSuccess } = useContext(CartContext);
+  const { isLoggedIn } = useContext(UserContext);
+  const [show, setShow] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+
+  const handleClose = () => {
+    setShow(false) 
+    if (isLoggedIn) {
+      setRedirect(true)
+    }
+  };
+  const handleShow = () => setShow(true);
+
+  const buyCart = async() => {
+    await cartCheckout();
+    if (checkoutSuccess) {
+      handleShow()    
+     }
+  }
+  if (redirect) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="container">
       <h2>Shopping Cart</h2>
@@ -61,12 +83,26 @@ console.log('cart', cart)
         <Button
         variant={`${isLoggedIn ? 'success' : 'secondary'}`}
      
-        // onClick={() => addToCart(item)}
+        onClick={buyCart}
         style={{ marginRight: '10px' }}
         className={`${isLoggedIn ? 'inline w-full' : 'disabled'}`}
                   >
                   Pagar
-                  </Button>
+      </Button>
+      <Modal show={show} onHide={handleClose} className='bg-dark'>
+          <Modal.Header closeButton>
+            <Modal.Title>Pago exitoso!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className='text-center'>
+            <Image src="https://media.istockphoto.com/id/1485017862/es/vector/chef-italiano-presentando-pizza-logo.jpg?s=612x612&w=0&k=20&c=eL38NRfvuPTvJlhJ2Z5j_WA0-eo40rFF19Zq5UiK3yY=" roundedCircle className='w-75'/>
+            <p>Felicidades, Pago exitoso, disfruta de tus deliciosas pizzas! </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="warning" onClick={handleClose}>
+              Cerrar
+            </Button>
+          </Modal.Footer>
+        </Modal>
     </div>
   );
 };

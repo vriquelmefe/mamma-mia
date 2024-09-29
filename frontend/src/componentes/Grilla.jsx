@@ -4,15 +4,12 @@ import { useState, useEffect } from "react";
 const Grilla = () => {
         const [pizza, setPizza] = useState([]);
   
-  const urlPizza = "http://localhost:5001/api/pizzas/"
+  const urlPizza = "http://localhost:5000/api/pizzas/"
 
   const getData = async () => {
     const response = await fetch(urlPizza);
     const dataPizzas = await response.json();
-
-    console.log('dataPizzas'   , dataPizzas);  
-    setPizza(dataPizzas)
-   
+    setPizza(dataPizzas) 
   };
   useEffect(() => {
     getData();

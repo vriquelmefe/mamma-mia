@@ -11,7 +11,7 @@ function Pizza() {
   // const pizzaId = window.location.pathname.split('/')[2]; // Extract ID from URL path
   const { id } = useParams();
 console.log('id en  pizza', id)
-  const urlPizza = `http://localhost:5001/api/pizzas/${id}`;
+  const urlPizza = `http://localhost:5000/api/pizzas/${id}`;
 
   useEffect(() => {
     const fetchData = async () => {

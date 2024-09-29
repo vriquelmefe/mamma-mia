@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -6,40 +6,43 @@ import Row from 'react-bootstrap/Row';
 import Header from '../componentes/Header';
 import Image from 'react-bootstrap/Image';
 import Modal from 'react-bootstrap/Modal';
+import { UserContext } from '../context/UserContext';
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
-    const [correo, setCorreo] = useState('');
-    const [password, setPassword] = useState('');
-    const [validated, setValidated] = useState(false);
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const { isLoggedIn,setIsLoggedIn, login } = useContext(UserContext);
+  const [correo, setCorreo] = useState('');
+  const [password, setPassword] = useState('');
+  const [validated, setValidated] = useState(false);
+  const [show, setShow] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+
+  const handleClose = () => {
+    setShow(false) 
+    setIsLoggedIn(true);
+    if (isLoggedIn) {
+      setRedirect(true)
+    }
+  };
+  const handleShow = () => setShow(true);
+  const handleSubmit = async (event) => {
+    const form = event.currentTarget;
+    event.preventDefault();
     
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        console.log('pasword', password.length)
-        if (password.length < 6 || correo == '') {
-           if (password.length < 6) {
-        
-        alert('La contraseña debe tener al menos 6 caracteres');
-      } else {
-        alert('El correo no debe estar vacio y debe tener el siguiente formato : a.a@gmail.com');
+    if (form.checkValidity()) {
+      const success = await login(correo, password);
+      console.log('success Login', success);
+      if (success) {
+        handleShow(); 
+     
       }
-        } else {
-            
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            } else {
-                console.log('Correo:', correo);
-                console.log('Password:', password);
-              handleShow()
-            }
-            
-            setValidated(true);
-          }
-        
-    };
+    }
+    setValidated(true);
+  };
+
+  if (redirect) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <>
@@ -49,8 +52,8 @@ const Login = () => {
         <Row className="mb-3">
           <Form.Group controlId="validationCustomUsername" className='my-3'>
             <Form.Label>Correo electrónico</Form.Label>
-                      <InputGroup hasValidation>
-                           <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+            <InputGroup hasValidation>
+              <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
               <Form.Control
                 type="email"
                 placeholder="Correo electrónico"
@@ -70,29 +73,32 @@ const Login = () => {
               <Form.Control
                 type="password"
                 placeholder="Contraseña"
-                aria-describedby="inputGroupPrepend"
                 required
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <Form.Control.Feedback type="invalid">
+                Por favor ingresa la contraseña.
+              </Form.Control.Feedback>
             </InputGroup>
-              <span >{password.length < 6 ? 'Debe ingresar minimo 6 digitos' : '' }</span>
-                  </Form.Group>
+            <span>{password.length < 6 ? 'Debe ingresar mínimo 6 dígitos' : ''}</span>
+          </Form.Group>
         </Row>
-              <Button type="submit" className='bg-warning'>Ingresar</Button>
-               <Modal show={show} onHide={handleClose} className='bg-dark'>
-        <Modal.Header closeButton>
-          <Modal.Title>Logeo exitoso!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className='text-center'>
-                      <Image src="https://media.istockphoto.com/id/1485017862/es/vector/chef-italiano-presentando-pizza-logo.jpg?s=612x612&w=0&k=20&c=eL38NRfvuPTvJlhJ2Z5j_WA0-eo40rFF19Zq5UiK3yY=" roundedCircle  className='w-75'/>
-                  <p>Felicidades, Ingreso exitoso!</p>
-                  </Modal.Body>
-        <Modal.Footer>
-          <Button variant="warning" onClick={handleClose}>
-            Cerrar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        <Button type="submit" className='bg-warning'>Ingresar</Button>
+
+        <Modal show={show} onHide={handleClose} className='bg-dark'>
+          <Modal.Header closeButton>
+            <Modal.Title>Logeo exitoso!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className='text-center'>
+            <Image src="https://media.istockphoto.com/id/1485017862/es/vector/chef-italiano-presentando-pizza-logo.jpg?s=612x612&w=0&k=20&c=eL38NRfvuPTvJlhJ2Z5j_WA0-eo40rFF19Zq5UiK3yY=" roundedCircle className='w-75'/>
+            <p>Felicidades, ingreso exitoso!</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="warning" onClick={handleClose}>
+              Cerrar
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Form>
     </>
   );

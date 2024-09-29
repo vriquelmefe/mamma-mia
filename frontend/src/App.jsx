@@ -10,11 +10,11 @@ import Home from './pages/Home.jsx'
 import Footer from './componentes/Footer.jsx'
 import Profile from './componentes/Profile.jsx';
 import NotFound from './componentes/NotFound.jsx';
-import { AuthContex } from './context/AuthContex';
+import { UserContext } from './context/UserContext.jsx';
 import { useContext } from'react';
 
 function App() {
-  const { isLoggedIn } = useContext(AuthContex);
+  const { isLoggedIn } = useContext(UserContext);
 
   return (
 <>
@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route  path="/" element={ <Home />}/>
           <Route path="/register" element={isLoggedIn ? <Navigate to="/" /> : <Registro />} />
-          <Route path="/login" element={isLoggedIn ? <Navigate to="/" /> : <Login />}/>
+          <Route path="/login" element={!isLoggedIn ? <Login/> :<Navigate to="/"/>}/>
           <Route path="/cart" element={<Cart />}/>
           <Route path="/pizza/:id" element={<Pizza />}/>
           <Route path="/profile" element={!isLoggedIn ? <Navigate to="/login" /> : <Profile />}/>
